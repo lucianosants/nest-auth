@@ -5,7 +5,6 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { Prisma } from '@prisma/client';
 
 import * as bcrypt from 'bcrypt';
-import { FindUserByEmailDto } from './dto/find-user-by-email.dto';
 
 @Injectable()
 export class UserService {
@@ -25,14 +24,11 @@ export class UserService {
     };
   }
 
-  async findByEmail(findUserByEmailDto: FindUserByEmailDto): Promise<User> {
+  async findByEmail(email: string): Promise<User> {
     const user = await this.prisma.user.findUnique({
-      where: findUserByEmailDto,
+      where: { email: email },
     });
 
-    return {
-      ...user,
-      password: undefined,
-    };
+    return user;
   }
 }

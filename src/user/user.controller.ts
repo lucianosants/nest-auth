@@ -1,7 +1,6 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
-import { FindUserByEmailDto } from './dto/find-user-by-email.dto';
 
 @Controller('user')
 export class UserController {
@@ -13,7 +12,7 @@ export class UserController {
   }
 
   @Post('users')
-  findByEmail(@Body() findUserByEmailDto: FindUserByEmailDto) {
-    return this.userService.findByEmail(findUserByEmailDto);
+  findByEmail() {
+    return this.userService.findByEmail('luciano4@gmail.com');
   }
 }
